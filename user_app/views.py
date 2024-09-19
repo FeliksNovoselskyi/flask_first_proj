@@ -17,15 +17,16 @@ def auth_view():
             flash('Ви вийшли з системи.', 'info')
             return redirect('/')
         
-        # Поиск пользователя в базе данных
+        # Поиск пользователя в базе данных с введенным именем
         user = User.query.filter_by(username=username).first()
         
         if username and password:
+            # После нахождения, сверение паролей
             if user and bcrypt.check_password_hash(user.password, password):
                 # Успешная авторизация
                 login_user(user)
                 flash('Вітаємо у вашому акаунті!', 'success')
-                return redirect('/')  # Перенаправьте на домашнюю страницу
+                return redirect('/')  # Отправляем на главную страницу
             else:
                 flash("Неправильне ім'я або пароль!", 'danger')
         else:
@@ -43,6 +44,7 @@ def reg_view():
 
         if username and password and confirm_password:
             if password == confirm_password:
+                # Генерация зашифрованого пароля
                 hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
                 
                 user = User(
@@ -50,6 +52,7 @@ def reg_view():
                     password = hashed_password,
                 )
                 
+                # Добавляем пользователя в базу данных
                 DB.session.add(user)
                 DB.session.commit()
             else:
