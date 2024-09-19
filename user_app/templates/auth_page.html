@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %} Authorization page {% endblock %}
+
+{% block content %}
+    <h1>Авторизація</h1>
+    <p>Ще немає акаунту?<a href="/reg/">Створити</a></p>
+    <form action="" method="post">
+        <p>Введіть ім'я</p>
+        <input type="text" name="username">
+        <p>Введіть пароль</p>
+        <input type="text" name="password">
+
+        <!-- Тут выводятся ошибки пользователя с помощью функции flash -->
+        {% for category, message in get_flashed_messages(with_categories=True) %}
+            <div class="{{category}}">{{message}}</div>
+        {% endfor %}
+
+        <input type="submit" value="Підтвердити" name="submit_btn">
+
+        {% if current_user.is_authenticated %}
+            <input type="submit" value="Вийти" name="leave_btn">
+        {% endif %}
+    </form>
+{% endblock %}

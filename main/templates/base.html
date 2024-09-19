@@ -7,12 +7,18 @@
 </head>
 <body>
     <header>
+        <a href="/">Головна сторінка</a>
 
+        {% if current_user.is_authenticated %}
+            <p><a href="/auth/">{{current_user.username}}</a></p>
+        {% else %}
+            <p><a href="/auth/">Увійти</a></p>
+        {% endif %}
     </header>
 
     <main>
         {% block content %}
-        
+
         {% endblock %}
     </main>
     

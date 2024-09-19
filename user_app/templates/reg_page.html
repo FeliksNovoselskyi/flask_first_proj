@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %} Registration page {% endblock %}
+
+{% block content %}
+    <h1>Реєстрація</h1>
+    <p>Вже є акаунт?<a href="/auth/">Увійти</a></p>
+    <form action="" method="post">
+        <p>Введіть ім'я</p>
+        <input type="text" name="username">
+        <p>Введіть пароль</p>
+        <input type="text" name="password">
+        <p>Підтвердіть пароль</p>
+        <input type="text" name="confirm_password">
+
+        <!-- Тут выводятся ошибки пользователя с помощью функции flash -->
+        {% for category, message in get_flashed_messages(with_categories=True) %}
+            <div class="{{category}}">{{message}}</div>
+        {% endfor %}
+
+        <input type="submit" value="Підтвердити" name="submit_btn">
+        <!-- <input type="submit" value="Підтвердити" name="leave_btn"> -->
+    </form>
+{% endblock %}

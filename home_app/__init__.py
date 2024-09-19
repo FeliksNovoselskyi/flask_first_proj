@@ -1,5 +1,5 @@
 from .app import home_app
-from .views import render_home
+from .views import home_view
 
 # Импорты сделаны для того чтобы всё работало внутри urls.py
 # Так как обращаясь к приложению мы в urls.py мы обращаемся к файлу __init__.py этого приложения
